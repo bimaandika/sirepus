@@ -2,22 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Family_Cards', {
+    await queryInterface.createTable('Medicines', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      family_card_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          notNull: true,
-        }
-      },
-      head_of_household: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -25,7 +17,7 @@ module.exports = {
           notNull: true,
         }
       },
-      address: {
+      brand: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -33,15 +25,31 @@ module.exports = {
           notNull: true,
         }
       },
-      number_of_family_members: {
-        type: Sequelize.INTEGER,
+      type: {
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
           notNull: true,
         }
       },
-      number_family_folder: {
+      category: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        }
+      },
+      unit: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        }
+      },
+      stock: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -60,6 +68,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Family_Cards');
+    await queryInterface.dropTable('Medicines');
   }
 };

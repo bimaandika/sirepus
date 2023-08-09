@@ -2,22 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Family_Cards', {
+    await queryInterface.createTable('Employees', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      family_card_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          notNull: true,
-        }
-      },
-      head_of_household: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -33,21 +25,51 @@ module.exports = {
           notNull: true,
         }
       },
-      number_of_family_members: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          notNull: true,
-        }
-      },
-      number_family_folder: {
+      phone_number: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
           notNull: true,
         }
+      },
+      position: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        }
+      },
+      identity_id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        }
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        }
+      },
+      healthcare_facility_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+        references: {
+          model: "Healthcare_Facilities",
+          key: "id"
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -60,6 +82,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Family_Cards');
+    await queryInterface.dropTable('Employees');
   }
 };

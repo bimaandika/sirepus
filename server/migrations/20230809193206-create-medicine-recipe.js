@@ -2,47 +2,43 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Family_Cards', {
+    await queryInterface.createTable('Medicine_Recipes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      family_card_id: {
+      medical_record_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
           notNull: true,
-        }
+        },
+        references: {
+          model: "Medical_Records",
+          key: "id"
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
-      head_of_household: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          notNull: true,
-        }
-      },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          notNull: true,
-        }
-      },
-      number_of_family_members: {
+      medicine_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
           notNull: true,
-        }
+        },
+        references: {
+          model: "Medicines",
+          key: "id"
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
-      number_family_folder: {
-        type: Sequelize.STRING,
+      dose: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
@@ -60,6 +56,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Family_Cards');
+    await queryInterface.dropTable('Medicine_Recipes');
   }
 };
